@@ -1,432 +1,203 @@
 import pytest
 from DataStructures.List import list_node as node
 from DataStructures.Utils import error as error
-
-
-def new_list():
-    
-    """Crea una lista implementada con una Lista Simplemente Encadenada vacía. 
-
-        Define ``first`` y ``last`` como None y el ``size`` en cero
-
-        :returns: Lista creada
-        :rtype: linked_list
-    """
-    newlist = {'first': None,
-               'last': None,
-               'size': 0,
-               }
-
-    return newlist
-
+def new_list ():
+    new_list = {
+    'first': None,
+    'last': None,
+    'size': 0,
+    }
+    return new_list
 
 def add_first(my_list, element):
-    """Agrega un elemento en la primera posición de la lista.
-
-    Al agregar un elemento en la primera posición de la lista, se incrementa el tamaño de la lista en uno.
-    En caso de que la lista esté vacía, el nuevo elemento se convierte en el primer y último elemento de la lista.
-
-
-    :param my_list: SingleLinkedList en la que se va a insertar el elemento
-    :type my_list: single_linked_list
-    :param element: Elemento a insertar
-    :type element: any
-
-    :returns: SingleLinkedList con el elemento insertado en la primera posición
-    :rtype: single_linked_list
-    """
-    try:
-        new_node = node.new_single_node(element)
-        new_node['next'] = my_list['first']
-        my_list['first'] = new_node
-        if (my_list['size'] == 0):
-            my_list['last'] = my_list['first']
-        my_list['size'] += 1
-        return my_list
-    except Exception as exp:
-        error.reraise(exp, 'singlelinkedlist->add_first: ')
-
-
-def add_last(my_list, element):
-    """ Agrega un elemento en la última posición de la lista.
-
-        Al agregar un elemento en la última posición de la lista y se incrementa el tamaño de la lista en uno.
-        En caso de que la lista esté vacía, el nuevo elemento se convierte en el primer y último elemento de la lista.
-        
-        :param my_list: SingleLinkedList en la que se va a insertar el elemento
-        :type my_list: single_linked_list
-        :param element: Elemento a insertar
-        :type element: any
-
-        :returns: SingleLinkedList con el elemento insertado en la última posición
-        :rtype: single_linked_list
-    """
-    try:
-        new_node = node.new_single_node(element)
-
-        if my_list['size'] == 0:
-            my_list['first'] = new_node
-        else:
-            my_list['last']['next'] = new_node
-        my_list['last'] = new_node
-        my_list['size'] += 1
-        return my_list
-    except Exception as exp:
-        error.reraise(exp, 'singlelinkedlist->add_last: ')
-
-
-def is_empty(my_list):
-    """ Indica si la lista está vacía
-
-        :param my_list: Lista a examinar
-        :type my_list: single_linked_list
-
-        :returns: ``True`` si la lista está vacía, ``False`` en caso contrario
-        :rtype: bool
-    """
-    try:
-        return my_list['size'] == 0
-    except Exception as exp:
-        error.reraise(exp, 'singlelinkedlist->is_empty: ')
-
-
-def size(my_list):
-    """ Retorna el número de elementos de la lista.
-
-        :param my_list: La lista a examinar
-        :type my_list: single_linked_list
-
-        :returns: Número de elementos de la lista
-        :rtype: int
-    """
-    try:
-        return my_list['size']
-    except Exception as exp:
-        error.reraise(exp, 'singlelinkedlist->size: ')
-
-
-def first_element(my_list):
-    """ Retorna el primer elemento de una lista.
-        
-        Retorna el primer elemento de la lista, si la lista no está vacía.
-        Esta funcion NO elimina el elemento de la lista.
-
-        :param my_list: La lista a examinar
-        :type my_list: single_linked_list
-
-        :returns: Primer elemento de la lista
-        :rtype: any
-    """
-    try:
-        if my_list['first'] is not None:
-            return my_list['first']['info']
-        return None
-    except Exception as exp:
-        error.reraise(exp, 'singlelinkedlist->first_element: ')
-
-
-def last_element(my_list):
-    """ Retorna el último elemento de una lista.
-
-        Retorna el último elemento de la lista, si la lista no está vacía.
-        Esta funcion NO elimina el elemento de la lista.
-
-        :param my_list: La lista a examinar
-        :type my_list: single_linked_list
-
-        :returns: Último elemento de la lista
-        :rtype: any
-    """
-    try:
-        if my_list['last'] is not None:
-            return my_list['last']['info']
-        return None
-    except Exception as exp:
-        error.reraise(exp, 'singlelinkedlist->last_element: ')
-
-
-def get_element(my_list, pos):
-    """ Retorna el elemento en la posición ``pos`` de la lista.
-
-        Se recorre la lista hasta el elemento ``pos``, el cual debe ser igual o mayor
-        que cero y menor al tamaño de la lista.
-        Se retorna el elemento en dicha posición sin eliminarlo.
-        La lista no puede ser vacía.
-
-        :param my_list: La lista a examinar
-        :type my_list: single_linked_list
-        :param pos: Posición del elemento a retornar
-        :type pos: int
-
-        :returns: Elemento en la posición ``pos``
-        :rtype: any
-    """
-    searchpos = 0
-    node = my_list['first']
-    while searchpos < pos:
-        node = node['next']
-        searchpos += 1
-    return node['info']  
-
-
-def delete_element(my_list, pos):
-    """ Elimina el elemento en la posición ``pos`` de la lista.
-
-        La lista no puede estar vacía.
-        Elimina el elemento que se encuentra en la posición ``pos`` de la lista.
-        ``Pos`` debe ser igual o mayor que cero y menor al tamaño de la lista.
-        Se decrementa en un uno el tamaño de la lista.
-
-        :param my_list: La lista a examinar
-        :type my_list: single_linked_list
-        :param pos: Posición del elemento a eliminar
-        :type pos: int
-
-        :returns: Lista con el elemento eliminado
-        :rtype: single_linked_list
-    """
-    try:
-        if (my_list['size'] > 0):
-            if (pos == 0):
-                my_list['first'] = my_list['first']['next']
-                my_list['size'] -= 1
-            elif (pos > 1):
-                temp = my_list['first']
-                searchpos = 1
-                while searchpos < pos:
-                    temp = temp['next']
-                    searchpos += 1
-                temp['next'] = temp['next']['next']
-                if (pos == my_list['size']-1):
-                    my_list['last'] = temp
-                my_list['size'] -= 1
-        return my_list
-    except Exception as exp:
-        error.reraise(exp, 'singlelinkedlist->delete_element: ')
-
-
-def remove_first(my_list):
-    """ Remueve el primer elemento de la lista y lo retorna.
-
-        Elimina y retorna el primer elemento de la lista.
-        El tamaño de la lista se decrementa en uno.  Si la lista
-        es vacía se retorna ``None``.
-
-        :param my_list: La lista a examinar
-        :type my_list: single_linked_list
-
-        :returns: Primer elemento de la lista
-        :rtype: any
-    """
-    try:
-        if my_list['first'] is not None:
-            temp = my_list['first']['next']
-            node = my_list['first']
-            my_list['first'] = temp
-            my_list['size'] -= 1
-            if (my_list['size'] == 0):
-                my_list['last'] = my_list['first']
-            return node['info']
-        else:
-            return None
-    except Exception as exp:
-        error.reraise(exp, 'singlelinkedlist->remove_first: ')
-
-
-def remove_last(my_list):
-    """ Remueve el último elemento de la lista.
-
-        Elimina el último elemento de la lista  y lo retorna en caso de existir.
-        El tamaño de la lista se decrementa en 1.
-        Si la lista es vacía retorna ``None``.
-
-        :param my_list: La lista a examinar
-        :type my_list: single_linked_list
-
-        :returns: Último elemento de la lista
-        :rtype: any
-    """
-    try:
-        if my_list['size'] > 0:
-            if my_list['first'] == my_list['last']:
-                node = my_list['first']
-                my_list['last'] = None
-                my_list['first'] = None
-            else:
-                temp = my_list['first']
-                while temp['next'] != my_list['last']:
-                    temp = temp['next']
-                node = my_list['last']
-                my_list['last'] = temp
-                my_list['last']['next'] = None
-            my_list['size'] -= 1
-            return node['info']
-        else:
-            return None
-    except Exception as exp:
-        error.reraise(exp, 'singlelinkedlist->remoLast: ')
-
-
-def insert_element(my_list, element, pos):
-    """ Inserta el elemento element en la posición ``pos`` de la lista.
-
-        Inserta el elemento en la posición ``pos`` de la lista.
-        La lista puede ser vacía.
-        Se incrementa en 1 el tamaño de la lista.
-        ``pos`` debe ser mayor o igual que cero y menor al tamaño de la lista.
-
-        :param my_list: La lista en la que se va a insertar el elemento
-        :type my_list: single_linked_list
-        :param element: El elemento a insertar
-        :type element: any
-        :param pos: posición en la que se va a insertar el elemento
-        :type pos: int
-
-        :returns: Lista con el elemento insertado
-        :rtype: single_linked_list
-    """
-    new_node = node.new_single_node(element)
-    if (my_list['size'] == 0):
-        my_list['first'] = new_node
-        my_list['last'] = new_node
-
-    elif ((my_list['size'] > 0) and (pos == 0)):
-        new_node['next'] = my_list['first']
-        my_list['first'] = new_node
-
+    nuevo = node.new_single_node(element)
+    if my_list["size"]==0:
+        my_list["first"]= nuevo
+        my_list["last"]=nuevo
+        my_list["size"]+=1
     else:
-        cont = 1
-        temp = my_list['first']
-        while cont < pos:
-            temp = temp['next']
-            cont += 1
-        new_node['next'] = temp['next']
-        temp['next'] = new_node
-
-        if (pos == my_list['size']):
-            my_list['last'] = new_node
-
-    my_list['size'] += 1
+        inicial = my_list["first"]
+        nuevo["next"] = inicial
+        my_list["first"] = nuevo
+        my_list["size"] += 1
+        
     return my_list
 
+def add_last(my_list, element):
+    nuevo = node.new_single_node(element)
+    if my_list["size"] == 0:
+         my_list["first"] = nuevo
+         my_list["last"] = nuevo
+    else:
+        my_list["last"]["next"] = nuevo
+        my_list["last"] = nuevo
+    my_list["size"] += 1
+    
+    return my_list
+        
+
+def is_empty(my_list):
+    if my_list["size"] == 0:
+        return True
+    else:
+        return False
+    
+def size(my_list):
+    return my_list["size"]
+
+def first_element(my_list):
+    return my_list["first"]["info"]
+    
+def last_element(my_list):
+    if is_empty(my_list):
+        return None
+    else:
+        return my_list["last"]["info"]
+
+def get_element(my_list, pos):
+    if (is_empty(my_list)) or (pos < 0) or (pos > size(my_list)):
+        return None
+    if pos == 0:
+        return my_list["first"]["info"]
+    else:
+        actual = my_list["first"]
+        i = 0
+        while (actual != None) and (i != pos):
+            actual = actual["next"]
+            i += 1    
+            if i == pos:
+                return actual["info"]
+
+def remove_first(my_list):
+    if is_empty(my_list):
+        return None 
+    else:
+        first_nodo = my_list["first"]
+        nodo = node.new_single_node(first_nodo)
+        info_nodo = nodo["info"]
+        my_list["first"] = first_nodo ["next"]
+        my_list["size"] -= 1
+        if size(my_list) == 0:
+            my_list["last"] = None
+            my_list["first"] = None
+        return info_nodo
+
+def remove_last(my_list):
+    if is_empty(my_list):
+        return None 
+    else:
+        actual = my_list ["first"]
+        while actual["next"] is not None:
+            prev = actual
+            actual = actual["next"]
+        prev["next"] = None
+        my_list["last"] = prev
+        my_list["size"] -= 1
+        if size(my_list) == 0:
+            my_list = new_list()
+        return my_list
+
+def insert_element(my_list, element, pos):
+    if pos < 0 or pos > size(my_list): 
+        return None
+    else:
+        nodo = node.new_single_node(element)
+        if is_empty(my_list) or pos == 0:
+            nodo["next"] = my_list["first"]
+            my_list["first"] = nodo
+            if my_list["size"] == 0:
+                my_list["last"] = nodo
+        else:
+            actual = my_list ["first"]
+            i = 0
+            while (actual != None) and (i != pos):
+                prev = actual
+                actual = actual["next"]
+                i += 1
+            nodo["next"] = actual
+            prev["next"] = nodo
+            if nodo["next"] is None:
+                my_list["last"] = nodo
+        my_list["size"] += 1
+        
+        return my_list
 
 def is_present(my_list, element, cmp_function):
-    """ Informa si el elemento element esta presente en la lista.
+    actual = my_list["first"]
+    pos = 0
+    while actual != None:
+        if cmp_function(element, actual["info"]) == 0:
+            return pos
+        else:
+            pos += 1
+            actual = actual["next"]
+    return -1
 
-        Informa si un elemento está en la lista.
-        Si esta presente, retorna la posición en la que se encuentra
-        o menos uno (-1) si no esta presente. Se utiliza la función de comparación
-        pasada por parámetro para comparar los elementos,
-        la cual debe retornan cero si los elementos son iguales.
-
-        :param my_list: La lista a examinar
-        :type my_list: single_linked_list
-        :param element: El elemento a buscar
-        :type element: any
-        :param cmp_function: Función de comparación de elementos
-        :type cmp_function: function
-
-        :returns: Posición del elemento en la lista
-        :rtype: int
-    """
-    try:
-        is_in_array = False
-        temp = my_list['first']
-        count = 0
-        while not is_in_array and temp is not None:
-            if cmp_function(element, temp['info']) == 0:
-                is_in_array = True
-            else:
-                temp = temp['next']
-                count += 1
-
-        if not is_in_array:
-            count = -1
-        return count
-    except Exception as exp:
-        error.reraise(exp, 'singlelinkedlist->is_present: ')
-
-
-def change_info(my_list, pos, new_info):
-    """ Cambia la información contenida en el nodo de la lista
-        que se encuentra en la posición ``pos`` por la información recibida en new_info.
-
-        :param my_list: La lista a examinar
-        :type my_list: single_linked_list
-        :param pos: posición de la lista con la información a cambiar
-        :type pos: int
-        :param new_info: Nueva información que se debe poner en el nodo de la posición ``pos``
-        :type new_info: any
-
-        :returns: Lista con la información cambiada
-        :rtype: single_linked_list
-    """
-    try:
-        current = my_list['first']
-        cont = 0
-        while cont < pos:
-            current = current['next']
-            cont += 1
-        current['info'] = new_info
-        return my_list
-    except Exception as exp:
-        error.reraise(exp, 'singlelinkedlist->ichange_info: ')
-
+def delete_element(my_list, pos):    
+    nodo = my_list["first"]
+    nodo_anterior = None
+    conteo = 0
+    
+    while conteo < pos:
+        nodo_anterior = nodo
+        nodo = nodo["next"]
+        conteo += 1
+    nodo_actual = nodo
+    nodo_posterior = nodo_actual["next"]
+    if nodo_anterior == None:
+        my_list["first"] = nodo_posterior
+    else:
+        nodo_anterior["next"] = nodo_posterior
+    if nodo_posterior == None:
+        my_list["last"] = nodo_anterior
+    
+    my_list["size"] -= 1
+    
+    return my_list
 
 def exchange(my_list, pos1, pos2):
-    """ Intercambia la información en las posiciones ``pos1`` y ``pos2`` de la lista.
+    a1=get_element(my_list,pos1)
+    a2=get_element(my_list,pos2)
+    change_info(my_list,pos1,a2)
+    change_info(my_list,pos2, a1)
+    
+    return my_list
+    
 
-        :param my_list: La lista a examinar
-        :type my_list: single_linked_list
-        :param pos1: Posición del primer elemento
-        :type pos1: int
-        :param pos2: Posición del segundo elemento
-        :type pos2: int
+def change_info(my_list, pos, new_info):
+    a=my_list["first"]
+    for i in range(pos):
+        a=a["next"]
+    a["info"] = new_info
+    
+    return my_list
+        
+        
+        
+    pass
 
-        :returns: Lista con la información intercambiada
-        :rtype: single_linked_list
-    """
-    try:
-        if pos1 == pos2:
-            return my_list
+def sub_list(my_list, pos, numelem):
+    sub_list = new_list()
+    nodo = my_list["first"]
+    conteo = 0
+
+    while conteo < pos and nodo != None:
+        nodo = nodo["next"]
+        conteo += 1
+
+    for nodos in range(numelem):
+        if nodo is None:
+            break
+        nuevo_nodo = node.new_single_node(nodo["info"])
+        if sub_list["first"] is None:
+            sub_list["first"] = nuevo_nodo
         else:
-            element_1 = get_element(my_list, pos1)
-            element_2 = get_element(my_list, pos2)
-            change_info(my_list, pos1, element_2)
-            change_info(my_list, pos2, element_1)
-    except Exception as exp:
-        error.reraise(exp, 'singlelinkedlist->exchange: ')
+            sub_list["last"]["next"] = nuevo_nodo
+        sub_list["last"] = nuevo_nodo
+        sub_list["size"] += 1
+        nodo = nodo["next"]
 
-
-def sub_list(my_list, pos, num_elem):
-    """ Retorna una sub-lista de la lista recibida.
-
-        Retorna una lista que contiene los elementos a partir de la posición ``pos``,
-        con una longitud de ``num_elem`` elementos.
-        Se crea una copia de dichos elementos y se retorna una lista nueva.
-
-        :param my_list: La lista origen
-        :type my_list: single_linked_list
-        :param pos: Posición del primer elemento
-        :type pos: int
-        :param num_elem: Posición del segundo elemento
-        :type pos: int
-
-        :returns: Sub-lista de la lista original
-        :rtype: single_linked_list
-    """
-    try:
-        sublst = new_list()
-        cont = 0
-        loc = pos
-        while cont < num_elem:
-            elem = get_element(my_list, loc)
-            add_last(sublst, elem)
-            loc += 1
-            cont += 1
-        return sublst
-    except Exception as exp:
-        error.reraise(exp, 'singlelinkedlist->sub_list: ')
+    return sub_list
 
 
 def compare_elements(my_list, element, info, cmp_function):
@@ -713,11 +484,7 @@ def partition(my_list, lo, hi, sort_crit):
 def default_sort_criteria(element1, element2):
     """ Función de comparación por defecto para ordenar de manera ascendente.
 
-<<<<<<< HEAD
-        Compara dos elementos y retorna ``True`` si el primer elemento es menor al segundo elemento.
-=======
         Compara dos elementos y retorna ``True`` si el primer elemento es menor o igual al segundo elemento.
->>>>>>> origin/main
 
         :param element1: Elemento 1
         :type element1: any
