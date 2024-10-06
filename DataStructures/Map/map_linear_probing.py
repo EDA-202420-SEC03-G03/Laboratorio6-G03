@@ -1,5 +1,27 @@
+import random
+from DataStructures.Map import map_functions as mp
+
 def new_map(num_elements, load_factor, prime=109345121):
-    pass
+    
+    capacity = mp.next_prime(int(num_elements // load_factor))
+    scale = random.randint(1, prime - 1)
+    shift = random.randint(0, prime - 1)
+    table = [] * capacity
+
+    map_structure = {
+        'prime': prime,
+        'capacity': capacity,
+        'scale': scale,
+        'shift': shift,
+        'table': table,
+        'current_factor': 0,
+        'limit_factor': load_factor,
+        'size': 0,
+        'type': 'PROBING'
+    }
+
+    return map_structure
+
 
 def put(my_map, key, value):
     pass
