@@ -98,13 +98,21 @@ def key_set(my_map):
     pass
 
 def value_set(my_map):
-    pass
+    return_list = al.new_list()
+    if size(my_map) > 0:
+        for i in range(my_map["capacity"]):
+            if is_available(my_map, i) is True:
+                al.add(return_list, my_map["table"][i]["value"])
+    return return_list
 
 def find_slot(my_map, key, hash_value):
     pass
 
 def is_available(table, pos):
-    pass
+    if table["elements"][pos]["key"] is None or table["elements"][pos]["key"] == "__EMPTY__":
+        return True
+    else:
+        return False
 
 def rehash(my_map):
     # import debugpy
@@ -132,4 +140,9 @@ def rehash(my_map):
     return my_map
 
 def default_compare(key, element):
-    pass
+    if key == element["key"]:
+        return 0
+    elif key < element["key"]:
+        return 1
+    elif key > element["key"]:
+        return -1

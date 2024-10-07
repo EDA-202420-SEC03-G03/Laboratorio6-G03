@@ -163,7 +163,7 @@ def test_key_set():
     assert lt.size(key_set) == 0
 
 
-@pytest.mark.skip(reason="No implementado aun")
+
 def test_value_set():
     map = setup_tests(None, None)
     mp.put(map, 1, 2)
@@ -230,7 +230,7 @@ def test_find_slot():
     assert ocupied_5 == False
 
 
-@pytest.mark.skip(reason="No implementado aun")
+
 def test_is_available():
     map = setup_tests(1, 0)
     mp.put(map, 1, 2)
@@ -248,11 +248,11 @@ def test_is_available():
 
 
 def test_rehash():
-    import debugpy
-    debugpy.listen(5678)
-    print("Waiting for debugger attach")
-    debugpy.wait_for_client()
-    debugpy.breakpoint()
+    #import debugpy
+    #debugpy.listen(5678)
+    #print("Waiting for debugger attach")
+    #debugpy.wait_for_client()
+    #debugpy.breakpoint()
 
     map = mp.new_map(5, 0.5, 7)
     for i in range(5):
