@@ -1,5 +1,5 @@
 from DataStructures.Utils.utils import handle_not_implemented
-from DataStructures.Map import map_separate_chaining as mp
+from DataStructures.Map import map_separate_chaining as ms
 from DataStructures.Map import map_entry as me
 from DataStructures.Map import map_functions as mf
 from DataStructures.List import array_list as lt

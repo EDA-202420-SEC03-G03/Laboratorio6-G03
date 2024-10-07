@@ -167,7 +167,7 @@ def test_key_set():
     assert lt.size(key_set) == 0
 
 
-@handle_not_implemented
+
 def test_value_set():
     map = setup_tests(None, None)
     mp.put(map, 1, 2)
@@ -234,7 +234,7 @@ def test_find_slot():
     assert ocupied_5 == False
 
 
-@handle_not_implemented
+
 def test_is_available():
     map = setup_tests(1, 0)
     mp.put(map, 1, 2)
