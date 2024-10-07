@@ -3,6 +3,7 @@ from DataStructures.Map import map_functions as mp
 from DataStructures.Map import map_entry as me
 from DataStructures.List import array_list as al
 
+
 def new_map(num_elements, load_factor, prime=109345121):
     
     capacity = mp.next_prime(int(num_elements // load_factor))
@@ -106,6 +107,10 @@ def is_available(table, pos):
     pass
 
 def rehash(my_map):
+    # import debugpy
+
+    # debugpy.breakpoint()
+
     
     old_table = my_map["table"]["elements"]
     old_capacity = my_map["capacity"]
@@ -124,7 +129,7 @@ def rehash(my_map):
         
         if key is not None:
             put(my_map, key, value)
-
+    return my_map
 
 def default_compare(key, element):
     pass
