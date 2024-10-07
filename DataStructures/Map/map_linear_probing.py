@@ -89,7 +89,7 @@ def remove(my_map, key):
 
 
 def size(my_map):
-    pass
+    return my_map["size"]
 
 def is_empty(my_map):
     pass
@@ -101,14 +101,17 @@ def value_set(my_map):
     return_list = al.new_list()
     if size(my_map) > 0:
         for i in range(my_map["capacity"]):
-            if is_available(my_map, i) is True:
-                al.add(return_list, my_map["table"][i]["value"])
+            if not is_available(my_map["table"], i):
+                al.add_last(return_list, my_map["table"]["elements"][i]["value"])
     return return_list
 
 def find_slot(my_map, key, hash_value):
     pass
 
 def is_available(table, pos):
+    # import debugpy
+
+    # debugpy.breakpoint()
     if table["elements"][pos]["key"] is None or table["elements"][pos]["key"] == "__EMPTY__":
         return True
     else:

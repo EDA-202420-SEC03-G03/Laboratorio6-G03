@@ -105,7 +105,6 @@ def test_remove():
     assert not mp.contains(new_map, 1)
 
 
-@pytest.mark.skip(reason="No implementado aun")
 def test_size():
     map = setup_tests(None, None)
     mp.put(map, 1, 2)
@@ -165,6 +164,11 @@ def test_key_set():
 
 
 def test_value_set():
+    # import debugpy
+    # debugpy.listen(5678)
+    # print("Waiting for debugger attach")
+    # debugpy.wait_for_client()
+    # debugpy.breakpoint()
     map = setup_tests(None, None)
     mp.put(map, 1, 2)
     mp.put(map, 2, 3)
