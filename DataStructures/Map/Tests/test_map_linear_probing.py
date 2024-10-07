@@ -199,7 +199,6 @@ def test_value_set():
     assert lt.size(value_set) == 0
 
 
-@pytest.mark.skip(reason="No implementado aun")
 def test_find_slot():
     map = setup_tests(1, 0)
     mp.put(map, 1, 2)

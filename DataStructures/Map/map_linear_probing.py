@@ -106,7 +106,20 @@ def value_set(my_map):
     return return_list
 
 def find_slot(my_map, key, hash_value):
-    pass
+    initial_pos = hash_value % my_map["capacity"]
+    pos = initial_pos
+    found = False
+    while pos != initial_pos or not found:
+        entry = my_map["table"]["elements"][pos]
+        entry_key = me.get_key(entry)
+        if is_available(my_map["table"], pos):
+            return False, pos
+        if default_compare(key, entry) == 0:
+            return True, pos
+        pos = (pos + 1) % my_map["capacity"]
+        found = True
+    return False, -1
+
 
 def is_available(table, pos):
     # import debugpy
