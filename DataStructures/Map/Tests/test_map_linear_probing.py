@@ -52,7 +52,6 @@ def test_put():
     assert new_map["capacity"] == 23
 
 
-@pytest.mark.skip(reason="No implementado aun")
 def test_contains():
     map = setup_tests(None, None)
     mp.put(map, 1, 2)
@@ -68,7 +67,6 @@ def test_contains():
     assert not mp.contains(new_map, 1)
 
 
-@pytest.mark.skip(reason="No implementado aun")
 def test_get():
     map = setup_tests(None, None)
     mp.put(map, 1, 2)
@@ -83,7 +81,6 @@ def test_get():
     assert mp.get(new_map, 1) is None
 
 
-@pytest.mark.skip(reason="No implementado aun")
 def test_remove():
     map = setup_tests(1, 0)
     mp.put(map, 1, 2)

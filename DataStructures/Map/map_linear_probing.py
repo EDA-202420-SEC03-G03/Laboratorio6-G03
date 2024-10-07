@@ -32,8 +32,7 @@ def new_map(num_elements, load_factor, prime=109345121):
 def put(my_map, key, value):
     
     hash_value = mp.hash_value(my_map, key)
-    index = hash_value
-    act_entry = al.get_element(my_map["table"], index)
+    act_entry = al.get_element(my_map["table"], hash_value)
     act_key = me.get_key(act_entry)
     
     if act_key is None:
@@ -53,15 +52,40 @@ def put(my_map, key, value):
         
 
 def contains(my_map, key):
-    pass
+    
+    hash_value = mp.hash_value(my_map, key)
+    act_entry = al.get_element(my_map["table"], hash_value)
+    act_key = me.get_key(act_entry)
+    
+    if act_key == key:
+        return True
+    
+    return False
+
 
 def get(my_map, key):
-    pass
+    
+    hash_value = mp.hash_value(my_map, key)
+    act_entry = al.get_element(my_map["table"], hash_value)
+    act_value = me.get_value(act_entry)
+    
+    return act_value
+
 
 def remove(my_map, key):
-    pass
+    
+    hash_value = mp.hash_value(my_map, key)
+    act_entry = al.get_element(my_map["table"], hash_value)
+    act_key = me.get_key(act_entry)
+    
+    if (act_key is not None) and (act_key != '__EMPTY__'):
+        me.set_key(act_entry, '__EMPTY__')
+        me.set_value(act_entry, '__EMPTY__')
+        my_map["size"] -= 1
+        my_map["current_factor"] = my_map["size"] / my_map["capacity"]
+    
+    return my_map
 
-#Hasta acá
 
 def size(my_map):
     pass
