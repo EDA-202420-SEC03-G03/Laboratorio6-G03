@@ -109,7 +109,7 @@ def test_remove():
     assert not mp.contains(new_map, 1)
 
 
-@handle_not_implemented
+
 def test_size():
     map = setup_tests(None, None)
     mp.put(map, 1, 2)
@@ -122,7 +122,7 @@ def test_size():
     assert mp.size(new_map) == 0
 
 
-@handle_not_implemented
+
 def test_is_empty():
     map = setup_tests(None, None)
     mp.put(map, 1, 2)
@@ -135,7 +135,6 @@ def test_is_empty():
     assert mp.is_empty(new_map)
 
 
-@handle_not_implemented
 def test_key_set():
     map = setup_tests(None, None)
     mp.put(map, 1, 2)
