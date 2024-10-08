@@ -117,7 +117,7 @@ def test_size():
     assert mp.size(new_map) == 0
 
 
-@pytest.mark.skip(reason="No implementado aun")
+
 def test_is_empty():
     map = setup_tests(None, None)
     mp.put(map, 1, 2)
@@ -130,7 +130,7 @@ def test_is_empty():
     assert mp.is_empty(new_map)
 
 
-@pytest.mark.skip(reason="No implementado aun")
+
 def test_key_set():
     map = setup_tests(None, None)
     mp.put(map, 1, 2)

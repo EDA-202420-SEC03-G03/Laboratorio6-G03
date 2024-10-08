@@ -89,13 +89,21 @@ def remove(my_map, key):
 
 
 def size(my_map):
+   
     return my_map["size"]
-
 def is_empty(my_map):
-    pass
+    if size(my_map)==0:
+        return True
+    return False
 
 def key_set(my_map):
-    pass
+    a=al.new_list()
+    for i in my_map["table"]["elements"]:
+        if i["key"]!=None and i["key"]!="__EMPTY__":
+            al.add_last(a,i["key"])
+        
+        
+    return a 
 
 def value_set(my_map):
     return_list = al.new_list()
