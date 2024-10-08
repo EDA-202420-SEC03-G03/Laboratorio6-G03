@@ -204,6 +204,7 @@ def add_book_author_and_year(catalog, author_name, book):
             lp.put(pub_year_map,pub_year,book)
     else:
         # TODO Completar escenario donde no se había agregado el autor al mapa principal
+        pass
     return catalog
 
 
@@ -230,7 +231,8 @@ def add_book_tag(catalog, book_tag):
         book_tag_list = lp.get(catalog['book_tags'],t['tag_id'])
         al.add_last(book_tag_list,book_tag)
     else:
-        #TODO Completar escenario donde el book_tag no se había agregado al mapa   
+        #TODO Completar escenario donde el book_tag no se había agregado al mapa
+        pass
     return catalog
 
 #  -------------------------------------------------------------
