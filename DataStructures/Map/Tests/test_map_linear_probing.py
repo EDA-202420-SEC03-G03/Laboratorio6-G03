@@ -164,11 +164,6 @@ def test_key_set():
 
 
 def test_value_set():
-    # import debugpy
-    # debugpy.listen(5678)
-    # print("Waiting for debugger attach")
-    # debugpy.wait_for_client()
-    # debugpy.breakpoint()
     map = setup_tests(None, None)
     mp.put(map, 1, 2)
     mp.put(map, 2, 3)
@@ -251,11 +246,6 @@ def test_is_available():
 
 
 def test_rehash():
-    #import debugpy
-    #debugpy.listen(5678)
-    #print("Waiting for debugger attach")
-    #debugpy.wait_for_client()
-    #debugpy.breakpoint()
 
     map = mp.new_map(5, 0.5, 7)
     for i in range(5):

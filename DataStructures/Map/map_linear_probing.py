@@ -122,19 +122,12 @@ def find_slot(my_map, key, hash_value):
 
 
 def is_available(table, pos):
-    # import debugpy
 
-    # debugpy.breakpoint()
-    if table["elements"][pos]["key"] is None or table["elements"][pos]["key"] == "__EMPTY__":
+    if al.get_element(table, pos)["key"] is None or al.get_element(table, pos)["key"] == "__EMPTY__":
         return True
-    else:
-        return False
+    return False
 
 def rehash(my_map):
-    # import debugpy
-
-    # debugpy.breakpoint()
-
     
     old_table = my_map["table"]["elements"]
     old_capacity = my_map["capacity"]
