@@ -204,6 +204,7 @@ def add_book_author_and_year(catalog, author_name, book):
             lp.put(pub_year_map,pub_year,book)
     else:
         # TODO Completar escenario donde no se había agregado el autor al mapa principal
+        pass
     return catalog
 
 
