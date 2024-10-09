@@ -230,7 +230,8 @@ def add_book_tag(catalog, book_tag):
         book_tag_list = lp.get(catalog['book_tags'],t['tag_id'])
         al.add_last(book_tag_list,book_tag)
     else:
-        #TODO Completar escenario donde el book_tag no se había agregado al mapa   
+       lp.put(catalog["book_tags"],t["tag_id"],t["book_id"])
+     
     return catalog
 
 #  -------------------------------------------------------------
@@ -241,19 +242,25 @@ def get_book_info_by_book_id(catalog, good_reads_book_id):
     """
     Retorna toda la informacion que se tenga almacenada de un libro según su good_reads_id.
     """
-    #TODO Completar función de consulta
-    pass
+    #mpletar función de consulta
+    return lp.get(catalog["books_by_id"],good_reads_book_id)
 
 
 def get_books_by_author(catalog, author_name):
     """
     Retorna los libros asociado al autor ingresado por párametro
     """
-    #TODO Completar función de consulta
-    pass
+    
+    return lp.get(catalog["books_by_authors"],author_name)
 
 
 def get_books_by_tag(catalog, tag_name):
+    
+    id=lp.get(catalog["tags"],tag_name)
+    t=lp.get(catalog["book_tags",id])
+    count=t["count"]
+    
+    
     """
     Retorna el número de libros que fueron etiquetados con el tag_name especificado.
     - Se obtiene el tag asociado al tag_name dado.
@@ -264,7 +271,7 @@ def get_books_by_tag(catalog, tag_name):
 
     """
     #TODO Completar función de consulta
-    pass
+    return count
 
 
 def get_books_by_author_pub_year(catalog, author_name, pub_year):
