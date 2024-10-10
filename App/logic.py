@@ -239,10 +239,12 @@ def add_book_tag(catalog, book_tag):
     t = new_book_tag(book_tag['tag_id'], book_tag['goodreads_book_id'], book_tag['count'])
     book_tag_value = lp.contains(catalog['book_tags'],t['tag_id'])
     if book_tag_value:
-        book_tag_list = lp.get(catalog['book_tags'],t['tag_id'])
+        book_tag_list = lp.get(catalog['book_tags'],t["tag_id"])
         al.add_last(book_tag_list,book_tag)
     else:
-       lp.put(catalog["book_tags"],t["tag_id"],t["book_id"])
+        z=al.new_list()
+        al.add_last(z,t)
+        lp.put(catalog["book_tags"],t["tag_id"],z)
      
     return catalog
 
