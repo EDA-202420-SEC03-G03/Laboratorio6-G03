@@ -190,8 +190,9 @@ def add_book_author_and_year(catalog, author_name, book):
     """
     books_by_year_author = catalog['books_by_year_author']
     pub_year = book['original_publication_year']
-    #Si el año de publicación está vacío se reemplaza por un valor simbolico
-    #TODO Completar manejo de los escenarios donde el año de publicación es vacío.
+    if pub_year==None:
+        book['original_publication_year']="_NONE_"
+  
     author_value = lp.get(books_by_year_author,author_name)
     if author_value:
         pub_year_value = lp.get(author_value,pub_year)
@@ -201,10 +202,20 @@ def add_book_author_and_year(catalog, author_name, book):
             books = al.new_list()
             al.add_last(books, book)
             pub_year_map = lp.new_map(1000,0.7)
-            lp.put(pub_year_map,pub_year,book)
+            lp.put(pub_year_map,pub_year,books)
+            lp.put(author_value,pub_year,pub_year_map)
     else:
-        # TODO Completar escenario donde no se había agregado el autor al mapa principal
-        pass
+        nuevo_autor=lp.new_map(1000,0.7)
+        pub_year_map = lp.new_map(1000,0.7)
+        books = al.new_list()
+        al.add_last(books, book)   
+        lp.put(pub_year_map,pub_year,books)
+        lp.put(nuevo_autor,book["authors"]) 
+        
+        
+        
+        
+       
     return catalog
 
 
@@ -258,7 +269,7 @@ def get_books_by_author(catalog, author_name):
 def get_books_by_tag(catalog, tag_name):
     
     id=lp.get(catalog["tags"],tag_name)
-    t=lp.get(catalog["book_tags",id])
+    t=lp.get(catalog["book_tags",id["tag_id"]])
     count=t["count"]
     
     
@@ -271,18 +282,20 @@ def get_books_by_tag(catalog, tag_name):
     de book_tags y finalmente relacionarlo con los datos completos del libro.
 
     """
-    #TODO Completar función de consulta
+    #
     return count
 
 
 def get_books_by_author_pub_year(catalog, author_name, pub_year):
+    t=lp.get(catalog["books_by_year_author"],author_name)
+    z=lp.get(t,pub_year)
     """
     - Se obtiene el mapa asociado al author_name dado
     - Si el author existe, se obtiene el mapa asociado al año de publicación
     Retorna los libros asociados a un autor y un año de publicación especificos
     """
-    #TODO Completar función de consulta
-    pass
+    
+    return z 
 
 
 #  -------------------------------------------------------------
