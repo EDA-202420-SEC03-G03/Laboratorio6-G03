@@ -265,7 +265,7 @@ def get_books_by_author(catalog, author_name):
     Retorna los libros asociado al autor ingresado por párametro
     """
     
-    return lp.get(catalog["books_by_authors"],author_name)
+    return author_name, lp.get(catalog["books_by_authors"],author_name)
 
 
 def get_books_by_tag(catalog, tag_name):
